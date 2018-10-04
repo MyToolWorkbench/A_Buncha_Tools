@@ -14,5 +14,6 @@ Contributors:
     Brianna Maitland
     Nick Zoner
     Anthony Onwuasoanya
+    Cristina Téllez
 
 
