@@ -1,13 +1,44 @@
 <!-- templates/registration/login.html -->
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% load static %}
 
 {% block content %}
-<h2>Login</h2>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static "login/login.css" %}">
+    </head>
+
+    <div class="mTW-logo-large">
+        <img src="{% static "login/mTW-Full.jpg" %}" alt="mTW-Full">
+    </div>
+
+    <div class="notImage" align="center">
+        <div class="loginFields">
+        <label for="uname">
+            <b> Username: </b>
+        </label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+
+        <label for="password">
+            <b> Password: </b>
+        </label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+        </div>
+
+        <div>
+            <button type="submit" class="loginButton"> Login </button>
+        </div>
+
+        <div class="loginExtras">
+            <input type="checkbox" checked="checked" name="rememberMe">
+            <label> Remember Me? </label>
+
+            <label> <a href="doSomeThing"> Forgot Password? </a> </label>
+        </div>
+    </div>
+
 </form>
 {% endblock %}}

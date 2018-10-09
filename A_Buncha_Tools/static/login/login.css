@@ -1,0 +1,57 @@
+/* Variables */
+element {
+    --font-size-pt: 14pt;
+}
+
+/* Classes */
+.mTW-logo-large {
+    text-align: center;
+    margin: 5% 0 2% 0;
+    position: relative;
+}
+
+.notImage {
+    font-size: var(--font-size-pt);
+    margin: 0 auto 15% auto;
+    width: 80%;
+    max-width: 600px;
+}
+
+.loginFields {
+    text-align: left;
+    font-size: var(--font-size-pt);
+    padding: 16px;
+    background-color: #fefefe;
+}
+
+.loginExtras {
+    padding: 16px;
+    background-color: #f1f1f1;
+}
+
+.loginButton {
+    background-color: #a51e24;
+    font-size: var(--font-size-pt);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Overrides */
+img {
+    width: 70%;
+    max-width: 579px;
+}
+
+input[type=text], input[type=password] {
+    font-size: var(--font-size-pt);
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
