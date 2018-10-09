@@ -125,5 +125,6 @@ SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 STATICFILES_DIRS = (
   os.path.join(SITE_ROOT, 'static/'),
 )
-
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/myToolWorkbench/login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = '/myToolWorkbench/login'

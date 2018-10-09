@@ -1,10 +1,10 @@
 <!-- templates/registration/login.html -->
-{% extends 'base.html' %}
+
 
 {% load static %}
 
 {% block content %}
-<form method="post">
+<form action ="{%  url 'login' %}" method="post">
     {% csrf_token %}
 
     <head>
@@ -15,21 +15,28 @@
         <img src="{% static "login/mTW-Full.jpg" %}" alt="mTW-Full">
     </div>
 
+
     <div class="notImage" align="center">
+        {%  if form.errors %}
+        <div class="loginError">
+            <p>Your username and/or password didn't match our records.
+            Please try again.</p>
+        </div>
+        {% endif %}
         <div class="loginFields">
-        <label for="uname">
+        <label for="username">
             <b> Username: </b>
         </label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <p>{{ form.username }}</p>
 
         <label for="password">
             <b> Password: </b>
         </label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+        <p>{{ form.password }}</p>
         </div>
 
         <div>
-            <button type="submit" class="loginButton"> Login </button>
+            <button type="submit" class="loginButton" value="login"> Login </button>
         </div>
 
         <div class="loginExtras">
@@ -43,4 +50,4 @@
     </div>
 
 </form>
-{% endblock %}}
+{% endblock %}
