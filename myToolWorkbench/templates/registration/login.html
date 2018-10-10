@@ -1,13 +1,13 @@
 <!-- templates/registration/login.html -->
-
-
 {% load static %}
 
 {% block content %}
-<form action ="{%  url 'login' %}" method="post">
+<form action="{% url 'login' %}" method="post" xmlns="http://www.w3.org/1999/html">
     {% csrf_token %}
 
     <head>
+        <link rel="icon" type="image" href="{% static "favicon.ico" %}"/>
+        <title> myToolWorkbench Login </title>
         <link rel="stylesheet" type="text/css" href="{% static "login/login.css" %}">
     </head>
 
@@ -19,20 +19,25 @@
     <div class="notImage" align="center">
         {%  if form.errors %}
         <div class="loginError">
-            <p>Your username and/or password didn't match our records.
-            Please try again.</p>
+            <span>
+                <b>
+                    Your username and/or password didn't match our records.
+                <br>
+                    Please try again.
+                </b>
+            </span>
         </div>
         {% endif %}
         <div class="loginFields">
         <label for="username">
             <b> Username: </b>
         </label>
-        <p>{{ form.username }}</p>
+        <span>{{ form.username }}</span>
 
         <label for="password">
             <b> Password: </b>
         </label>
-        <p>{{ form.password }}</p>
+        <span>{{ form.password }}</span>
         </div>
 
         <div>
