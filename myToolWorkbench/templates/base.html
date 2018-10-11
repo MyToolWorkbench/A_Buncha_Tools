@@ -12,6 +12,7 @@
         {% if user.is_authenticated %}
             Hi {{ user.first_name }}!
             <p class="logout"><a href="{% url 'logout' %}">logout</a></p>
+            <!-- THIS IS WHERE STUFF NEEDS TO BE PUT! -->
         {% else %}
             <div>
                 <div class="mTW-logo">
@@ -23,8 +24,6 @@
                 </div>
             </div>
         {% endif %}
-        {% block content %}
-        {% endblock %}
     </main>
 </body>
 </html>
