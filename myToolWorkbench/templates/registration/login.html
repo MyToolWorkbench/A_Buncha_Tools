@@ -45,12 +45,14 @@
         </div>
 
         <div class="loginExtras">
-            <input type="checkbox" checked="checked" name="rememberMe" style="float: left;">
-            <label for="rememberMe" style="float: left;"> Remember Me? </label>
+            <label for="rememberMe" style="float: left;">
+                <input type="checkbox" checked="checked" name="rememberMe" style="float: left;">
+                Remember Me?
+            </label>
 
-            <label> <a href="doSomeThing"> Forgot Password? </a> </label>
+            <label> <a href="}"> Forgot Password? </a> </label>
 
-            <label style="float: right;"> <a href="doSomeThing"> Register </a> </label>
+            <label style="float: right;"> <a href="{% url 'register' %}"> Register </a> </label>
         </div>
     </div>
 

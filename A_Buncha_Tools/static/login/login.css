@@ -8,7 +8,7 @@
 .loginError {
     width: 80%;
     max-width: 600px;
-    background-color: yellow;
+    background-color: #FFFFD2;
     padding: 2vw;
     border: black dashed 2px;
 }
@@ -47,6 +47,7 @@ img {
 }
 
 input[type=text], input[type=password] {
+    font-size: 16pt;
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;

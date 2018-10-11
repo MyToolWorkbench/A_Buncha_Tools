@@ -1,0 +1,27 @@
+.mTW-logo {
+    text-align: center;
+    margin: 5% 0 2% 0;
+    position: relative;
+
+}
+
+.button_container {
+    text-align: center;
+}
+
+.linkButton {
+    background-color: #a51e24;
+    font-size: 16pt;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: 1px black solid;
+    cursor: pointer;
+    width: 25%;
+    max-width: 300px;
+}
+
+img {
+    width: 70%;
+    max-width: 579px;
+}
