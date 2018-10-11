@@ -1,6 +1,10 @@
 <!-- templates/registration/login.html -->
 {% load static %}
 
+{% if user.is_authenticated %}
+    <!-- !!REDIRECT TO DASHBOARD!! -->
+{%  endif %}
+
 {% block content %}
 <form action="{% url 'login' %}" method="post" xmlns="http://www.w3.org/1999/html">
     {% csrf_token %}
