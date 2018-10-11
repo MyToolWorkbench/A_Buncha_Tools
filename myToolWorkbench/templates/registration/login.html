@@ -1,6 +1,11 @@
 <!-- templates/registration/login.html -->
 {% load static %}
 
+{% if user.is_authenticated %}
+   <meta http-equiv="refresh" content="0; URL='{%  url 'dashboard' %}'" />
+
+{%  else %}
+
 {% block content %}
 <form action="{% url 'login' %}" method="post" xmlns="http://www.w3.org/1999/html">
     {% csrf_token %}
@@ -58,3 +63,4 @@
 
 </form>
 {% endblock %}
+{%  endif %}
