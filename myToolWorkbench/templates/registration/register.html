@@ -1,7 +1,21 @@
+{% if user.is_authenticated %}
+   <meta http-equiv="refresh" content="0; URL='{%  url 'dashboard' %}'" />
+
+{%  else %}
+
 <head>
     <title> myToolWorkbench Register </title>
 </head>
 
 <body>
-
+    {% block content %}
+    <h1>Register</h1>
+    <form role="form" action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    {% endblock %}
 </body>
+
+{% endif %}
