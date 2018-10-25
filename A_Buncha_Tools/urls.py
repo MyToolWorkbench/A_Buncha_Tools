@@ -20,6 +20,10 @@ from myToolWorkbench import views
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='dashboard.html'), name='dashboard'),
+    path('myToolWorkbench/home/', TemplateView.as_view(template_name='dashboard.html'), name='dashboard'),
+    path('myToolWorkbench/inventory/', TemplateView.as_view(template_name='inventory.html'), name='inventory'),
+    path('myToolWorkbench/sale/', TemplateView.as_view(template_name='sale.html'), name='sale'),
+    path('myToolWorkbench/people/', TemplateView.as_view(template_name='people.html'), name='people'),
     path('admin/', admin.site.urls),
     path('myToolWorkbench/', include('django.contrib.auth.urls')),
     path('myToolWorkbench/register/', TemplateView.as_view(template_name="registration/register.html"), name='register'),
