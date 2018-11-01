@@ -3,19 +3,41 @@
 
 {%  else %}
 
-<head>
-    <title> myToolWorkbench Register </title>
-</head>
+    {% load static %}
 
-<body>
-    {% block content %}
-    <h1>Register</h1>
-    <form role="form" action="" method="post">
+    <form action="{% url 'login' %}" method="post" xmlns="http://www.w3.org/1999/html">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+
+        <head>
+            <link rel="icon" type="image" href="{% static "favicon.ico" %}"/>
+            <title> myToolWorkbench Login </title>
+            <link rel="stylesheet" type="text/css" href="{% static "login/login.css" %}">
+        </head>
+
+        <div class="mTW-logo-large">
+            <img src="{% static "login/mTW-Full.jpg" %}" alt="mTW-Full">
+        </div>
+
+
+        <div class="notImage" align="center">
+            <div class="loginFields">
+            <label for="username">
+                <b> Username: </b>
+            </label>
+            <span>{{ form.username }}</span>
+
+            <label for="password">
+                <b> Password: </b>
+            </label>
+            <span>{{ form.password }}</span>
+            </div>
+
+            <div>
+                <button type="submit" class="loginButton" value="Register"> Register </button>
+            </div>
+
+        </div>
+
     </form>
-    {% endblock %}
-</body>
 
 {% endif %}
