@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image" href="{% static "favicon.ico" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "login/base.css" %}">
-    <title>myToolWorkbench</title>
+    <title>{%  block title %} myToolWorkbench {%  endblock %}</title>
 </head>
 <body>
     <main>
@@ -20,6 +20,8 @@
             </ul>
 
             <!-- THIS IS WHERE STUFF NEEDS TO BE PUT! -->
+            {% block content %}
+            {% endblock %}
 
         {% else %}
             <div>
