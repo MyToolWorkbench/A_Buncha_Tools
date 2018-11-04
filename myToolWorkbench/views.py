@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import AccessMixin
-
+from django.http import HttpResponseRedirect
 from myToolWorkbench.forms import RegisterForm
 
 
@@ -21,8 +21,13 @@ def logout_view(request):
 
 
 def register(request):
-    form_class = RegisterForm
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = RegisterForm()
 
-    return render(request, 'register.html', {
-        'form': form_class,
+    return render(request, 'registration/register.html', {
+        'form': form
     })

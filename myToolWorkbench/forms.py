@@ -4,9 +4,8 @@ from django import forms
 
 
 class RegisterForm(forms.Form):
-    contact_name = forms.CharField(required=True)
-    contact_email = forms.EmailField(required=True)
-    content = forms.CharField(
-        required=True,
-        widget=forms.Textarea
-    )
+    name = forms.CharField(label="Name", required=True)
+    email_address = forms.EmailField(label="Email Address", required=True)
+    username = forms.CharField(label="Username",required=True)
+    password = forms.CharField(label="Password")
+    password_conf = forms.CharField(label="Confirm Password")

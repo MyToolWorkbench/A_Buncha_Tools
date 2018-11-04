@@ -26,5 +26,6 @@ urlpatterns = [
     path('myToolWorkbench/people/', TemplateView.as_view(template_name='people.html'), name='people'),
     path('admin/', admin.site.urls),
     path('myToolWorkbench/', include('django.contrib.auth.urls')),
-    path('myToolWorkbench/register/', TemplateView.as_view(template_name="registration/register.html"), name='register'),
+    path('myToolWorkbench/register/', views.register, name='register'),
+    # path('myToolWorkbench/register/', TemplateView.as_view(template_name="registration/register.html"), name='register'),
 ]

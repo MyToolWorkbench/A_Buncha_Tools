@@ -1,43 +1,15 @@
-{% if user.is_authenticated %}
-   <meta http-equiv="refresh" content="0; URL='{%  url 'dashboard' %}'" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
 
-{%  else %}
-
-    {% load static %}
-
-    <form action="{% url 'login' %}" method="post" xmlns="http://www.w3.org/1999/html">
+    <form method ="post" id="user_registration">
         {% csrf_token %}
-
-        <head>
-            <link rel="icon" type="image" href="{% static "favicon.ico" %}"/>
-            <title> myToolWorkbench Login </title>
-            <link rel="stylesheet" type="text/css" href="{% static "login/login.css" %}">
-        </head>
-
-        <div class="mTW-logo-large">
-            <img src="{% static "login/mTW-Full.jpg" %}" alt="mTW-Full">
-        </div>
-
-
-        <div class="notImage" align="center">
-            <div class="loginFields">
-            <label for="username">
-                <b> Username: </b>
-            </label>
-            <span>{{ form.username }}</span>
-
-            <label for="password">
-                <b> Password: </b>
-            </label>
-            <span>{{ form.password }}</span>
-            </div>
-
-            <div>
-                <button type="submit" class="loginButton" value="Register"> Register </button>
-            </div>
-
-        </div>
-
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
     </form>
-
-{% endif %}
+</body>
+</html>
