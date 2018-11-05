@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.models import User
 
 from myToolWorkbench.forms import RegisterForm
+from myToolWorkbench.models import UserAccount
 
 
 def login_view(request):
@@ -32,11 +33,19 @@ def register(request):
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
 
-            if pass1 == pass2:
+            if User.objects.filter(username=username).exists():
+                print("User " + username + " already exists")
+            elif pass1 != pass2:
+                print("Entered passwords do not match")
+            else:
                 user = User.objects.create_user(username, email, pass1)
                 user.first_name = first_name
                 user.last_name = last_name
                 user.save()
+                user_account = UserAccount.objects.create(user=user)
+                user_account
+                user_account.save()
+
 
     else:
         form = RegisterForm()

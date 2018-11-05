@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from enum import Enum
 # Create your models here.
 
@@ -15,35 +16,28 @@ class Country(Enum):
 
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=30)
+    email_address = models.EmailField(default='default@email.com')
 
 
-class User(Person):
-    username = models.CharField(max_length=30)
-    password = models.CharField(max_length=30)
+class UserAccount(Person):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
 
 
 class Tool(models.Model):
     part_number = models.CharField(max_length=30)
-    description = models.TextField()
-    cost = models.DecimalField(max_digits=7, decimal_places=2)
-    special_retail = models.DecimalField(max_digits=7, decimal_places=2)
-    regular_retail = models.DecimalField(max_digits=7, decimal_places=2)
-    # catalogue_page
-    # tw_page
-    # UOM
-    upc_code = models.IntegerField()
-    weight = models.DecimalField(max_digits=7, decimal_places=2)
-    length = models.DecimalField(max_digits=7, decimal_places=2)
-    width = models.DecimalField(max_digits=7, decimal_places=2)
-    height = models.DecimalField(max_digits=7, decimal_places=2)
-    # origin_country
-
-"""
-Business:
-Address 
-Owner
-Phone #
-Day(s) of visit
-"""
+    description = models.TextField(default="")
+    cost = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
+    special_retail = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
+    regular_retail = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
+    upc_code = models.CharField(max_length=30, null=True)
+    weight = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
+    length = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
+    width = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
+    height = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
+    origin_country = models.CharField(max_length=10, null=True)

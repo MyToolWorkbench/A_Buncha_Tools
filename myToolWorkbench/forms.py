@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+#from .models import User
 # https://docs.djangoproject.com/en/1.8/ref/forms/fields/
 
 
