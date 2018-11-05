@@ -12,11 +12,55 @@ class Country(Enum):
 
 """
 
+'''
+class Days(models.Model):
+    DAYS = (
+        ('Mon', 'Monday'),
+        ('Tues', 'Tuesday'),
+        ('Wed', 'Wednesday'),
+        ('Thurs', 'Thursday'),
+        ('Fri', 'Friday'),
+        ('Sat', 'Saturday'),
+        ('Sun', 'Sunday'),
+    )
+    days_visited = models.CharField(max_length=4, choices=DAYS)
+'''
+
 
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     phone_number = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.first_name, self.last_name
+
+
+class Business(models.Model):
+    DAYS = (
+        ('Mon', 'Monday'),
+        ('Tue', 'Tuesday'),
+        ('Wed', 'Wednesday'),
+        ('Thu', 'Thursday'),
+        ('Fri', 'Friday'),
+        ('Sat', 'Saturday'),
+        ('Sun', 'Sunday'),
+    )
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length= 128)
+    owner_first = models.CharField(max_length=30)
+    owner_last = models.CharField(max_length=30)
+    phone_number = models.CharField(max_length=30)
+    day_visited = models.CharField(max_length=3, choices=DAYS)
+    employees = models.ManyToManyField(Person, through='Employed')
+
+    def __str__(self):
+        return self.name
+
+
+class Employed(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    business = models.ForeignKey(Business, on_delete=models.CASCADE)
 
 
 class User(Person):
@@ -39,6 +83,8 @@ class Tool(models.Model):
     width = models.DecimalField(max_digits=7, decimal_places=2)
     height = models.DecimalField(max_digits=7, decimal_places=2)
     # origin_country
+
+
 
 """
 Business:

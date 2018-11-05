@@ -1,9 +1,14 @@
+from datetime import date
+import calendar
+
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.models import User
+from django.views import generic
 
 from myToolWorkbench.forms import RegisterForm
+from .models import Business, Person
 
 
 def login_view(request):
@@ -43,3 +48,18 @@ def register(request):
     return render(request, 'registration/register.html', {
         'form': form
     })
+
+
+class DashboardView(generic.ListView):
+    template_name = 'dashboard.html'
+    context_object_name = 'today_business_list'
+
+    def get_queryset(self):
+        today = date.today()
+        today_str = calendar.day_name[today.weekday()]
+        return Business.objects.filter(days_visited=today_str[:3])
+
+
+class BusinessView(generic.DetailView):
+    template_name = 'people.html'
+    queryset = Business.objects.all()
