@@ -75,6 +75,14 @@ class BusinessView(generic.ListView):
         return Business.objects.all()
 
 
+class BusinessDetalView(generic.DetailView):
+    model = Business
+    template_name = 'business-details.html'
+
+    def get_queryset(self):
+        return Business.objects.all()
+
+
 def create_business(request):
     if request.method == 'POST':
         form = BusinessForm(request.POST)

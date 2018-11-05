@@ -9,7 +9,7 @@
     {% if today_business_list %}
         <ul>
         {% for business in today_business_list %}
-            <li> <h4>{{ business.name }}</h4>
+            <li> <a href="{%  url 'business-details' business.id %}"><h4>{{ business.name }}</h4></a>
                 {{ business.address }}</li>
         {% endfor %}
         </ul>

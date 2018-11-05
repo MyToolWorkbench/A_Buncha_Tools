@@ -1,0 +1,23 @@
+{%  extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{ business.name }}</h1>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <p> Address: {{ business.address }} <br>
+        Owner: {{ business.owner_first }} {{ business.owner_last }} <br>
+        Phone Number: {{ business.phone_number }} <br>
+        Day Visited: {{  business.get_day_visited_display }} <br>
+        Employees:
+    </p>
+    {% if customer_list %}
+        <ul>
+        {% for customer in customer_list %}
+            <li> <h4>{{ customer.name }}</h4>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No customers at this stop.</p>
+    {% endif %}
+
+{% endblock %}
