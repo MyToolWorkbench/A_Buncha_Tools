@@ -10,14 +10,13 @@
         Day Visited: {{  business.get_day_visited_display }} <br>
         Employees:
     </p>
-    {% if customer_list %}
+
         <ul>
-        {% for customer in customer_list %}
-            <li> <h4>{{ customer.name }}</h4>
+        {% for customer in business.employees.all %}
+            <li> <h4>{{ customer.first_name }}</h4>
+        {% empty %}
+            No customers at this stop.
         {% endfor %}
         </ul>
-    {% else %}
-        <p>No customers at this stop.</p>
-    {% endif %}
-
+    <label style="float: left;"> <a href="{% url 'add-customer' %}"> Add Customer </a> </label>
 {% endblock %}

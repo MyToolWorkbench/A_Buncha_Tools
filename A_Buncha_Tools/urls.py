@@ -27,7 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('myToolWorkbench/', include('django.contrib.auth.urls')),
     path('myToolWorkbench/register/', views.register, name='register'),
-    path('myToolWorkbench/add-business/', views.create_business, name = 'add-business'),
-    path('myToolWorkbench/<int:pk>/',views.BusinessDetalView.as_view(), name='business-details'),
+    path('myToolWorkbench/add-business/', views.create_business, name='add-business'),
+    path('myToolWorkbench/<int:pk>/',views.BusinessDetailView.as_view(), name='business-details'),
+    path('myToolWorkbench/add-customer/', views.create_customer, name='add-customer'),
     # path('myToolWorkbench/register/', TemplateView.as_view(template_name="registration/register.html"), name='register'),
 ]

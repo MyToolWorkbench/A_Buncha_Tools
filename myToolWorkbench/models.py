@@ -3,6 +3,16 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+class Person(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=150)
+    phone_number = models.CharField(max_length=30)
+    email_address = models.EmailField(default='default@email.com')
+    address = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.first_name, self.last_name
+
 '''
 class Days(models.Model):
     DAYS = (
@@ -23,16 +33,6 @@ Owner
 Phone #
 Day(s) of visit
 """
-
-
-class Person(models.Model):
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=150)
-    phone_number = models.CharField(max_length=30)
-    email_address = models.EmailField(default='default@email.com')
-
-    def __str__(self):
-        return self.first_name, self.last_name
 
 
 class Business(models.Model):

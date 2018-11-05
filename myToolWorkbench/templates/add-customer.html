@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}myTW People{% endblock %}
+
+{% block content %}
+    <br>
+    <form method="post">
+        {%  csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+
+{% endblock %}

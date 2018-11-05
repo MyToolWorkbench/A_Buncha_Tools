@@ -7,8 +7,8 @@ from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.models import User
 from django.views import generic
 
-from myToolWorkbench.forms import RegisterForm, BusinessForm
-from myToolWorkbench.models import UserAccount, Business, Person
+from myToolWorkbench.forms import RegisterForm, BusinessForm, CustomerForm
+from myToolWorkbench.models import UserAccount, Business, Person, Employed
 
 
 def login_view(request):
@@ -75,12 +75,13 @@ class BusinessView(generic.ListView):
         return Business.objects.all()
 
 
-class BusinessDetalView(generic.DetailView):
+class BusinessDetailView(generic.DetailView):
     model = Business
     template_name = 'business-details.html'
 
     def get_queryset(self):
         return Business.objects.all()
+
 
 
 def create_business(request):
@@ -105,10 +106,38 @@ def create_business(request):
                 business.phone_number = phone
                 business.day_visited = day
                 business.save()
-
-
     else:
         form = BusinessForm()
     return render(request, 'add-business.html', {
+        'form': form
+    })
+
+
+def create_customer(request):
+    if request.method == 'POST':
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            phone = form.cleaned_data.get('phone')
+            email = form.cleaned_data.get('email')
+            business = form.cleaned_data.get('business')
+
+            person = Person.objects.create()
+            person.first_name = first_name
+            person.last_name = last_name
+            person.phone_number = phone
+            person.email_address = email
+            person.save()
+
+            if Business.objects.filter(name=business).exists():
+                b1 = Business.objects.get(name=business)
+                e1 = Employed(person=person, business=b1)
+                e1.save()
+            else:
+                print("Business " + business + "does not exist yet. Please create the business first.")
+    else:
+        form = CustomerForm()
+    return render(request, 'add-customer.html', {
         'form': form
     })
