@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="icon" type="image" href="{% static "favicon.ico" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "register/register.css" %}">
 </head>
 <body>
+    <div class="mTW-logo-large">
+        <img src="{% static "login/mTW-Full.jpg" %}" alt="mTW-Full">
+    </div>
 
-    <form method ="post" id="user_registration">
+    <form method ="post" id="user_registration"> <!-- https://simpleisbetterthancomplex.com/article/2017/08/19/how-to-render-django-form-manually.html -->
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+
+        <div class="row">
+            <div class="field">
+                <label>First Name: </label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="field">
+                <label>Last Name: </label>
+                {{ form.last_name }}
+            </div>
+        </div>
+
+        <div class="field">
+              <label>Email: </label>
+              {{ form.email_address }}
+        </div>
+
+        <div class="field">
+            <label>Username: </label>
+            {{ form.username }}
+        </div>
+
+        <div class="row">
+            <div class="field">
+                <label>Password: </label>
+                {{ form.first_name }}
+            </div>
+
+            <div class="field">
+                <label>Confirm Password: </label>
+                {{ form.last_name }}
+            </div>
+        </div>
+
+        <button type="submit" class="registerButton">Register</button>
     </form>
 </body>
 </html>

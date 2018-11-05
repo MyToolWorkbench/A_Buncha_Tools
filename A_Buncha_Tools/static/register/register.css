@@ -1,16 +1,18 @@
 /* Classes */
-.mTW-logo-large {
+.mTW-logo {
     text-align: center;
     margin: 5% 0 2% 0;
     position: relative;
 }
 
-.loginError {
-    width: 80%;
-    max-width: 600px;
-    background-color: #FFFFD2;
-    padding: 2vw;
-    border: black dashed 2px;
+.button_container {
+    text-align: center;
+}
+
+.mTW-logo-large {
+    text-align: center;
+    margin: 5% 0 2% 0;
+    position: relative;
 }
 
 .notImage {
@@ -19,18 +21,7 @@
     max-width: 600px;
 }
 
-.loginFields {
-    text-align: left;
-    padding: 16px;
-    background-color: #fefefe;
-}
-
-.loginExtras {
-    padding: 16px;
-    background-color: #f1f1f1;
-}
-
-.loginButton {
+.registerButton {
     background-color: #a51e24;
     color: white;
     padding: 14px 20px;
@@ -46,7 +37,7 @@ img {
     max-width: 579px;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email] {
     font-size: 16pt;
     width: 100%;
     padding: 12px 20px;

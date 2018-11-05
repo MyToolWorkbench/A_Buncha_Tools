@@ -1,64 +1,64 @@
 <!-- templates/registration/login.html -->
-{% load static %}
+<head>
+    {% load static %}
+    <link rel="icon" type="image" href="{% static "favicon.ico" %}"/>
+    <title> myToolWorkbench Login </title>
+    <link rel="stylesheet" type="text/css" href="{% static "login/login.css" %}">
+</head>
 
-{% if user.is_authenticated %}
-   <meta http-equiv="refresh" content="0; URL='{%  url 'dashboard' %}'" />
-{%  else %}
+<body>
+    {% if user.is_authenticated %}
+       <meta http-equiv="refresh" content="0; URL='{%  url 'dashboard' %}'" />
+    {%  else %}
 
-<form action="{% url 'login' %}" method="post" xmlns="http://www.w3.org/1999/html">
-    {% csrf_token %}
-
-    <head>
-        <link rel="icon" type="image" href="{% static "favicon.ico" %}"/>
-        <title> myToolWorkbench Login </title>
-        <link rel="stylesheet" type="text/css" href="{% static "login/login.css" %}">
-    </head>
-
-    <div class="mTW-logo-large">
-        <img src="{% static "login/mTW-Full.jpg" %}" alt="mTW-Full">
-    </div>
-
-
-    <div class="notImage" align="center">
-        {%  if form.errors %}
-        <div class="loginError">
-            <span>
-                <b>
-                    Your username and/or password didn't match our records.
-                <br>
-                    Please try again.
-                </b>
-            </span>
-        </div>
-        {% endif %}
-        <div class="loginFields">
-        <label for="username">
-            <b> Username: </b>
-        </label>
-        <span>{{ form.username }}</span>
-
-        <label for="password">
-            <b> Password: </b>
-        </label>
-        <span>{{ form.password }}</span>
+        <div class="mTW-logo-large">
+            <img src="{% static "login/mTW-Full.jpg" %}" alt="mTW-Full">
         </div>
 
-        <div>
-            <button type="submit" class="loginButton" value="login"> Login </button>
-        </div>
+        <form action="{% url 'login' %}" method="post" xmlns="http://www.w3.org/1999/html">
+            {% csrf_token %}
 
-        <div class="loginExtras">
-            <label for="rememberMe" style="float: left;">
-                <input type="checkbox" checked="checked" name="rememberMe" style="float: left;">
-                Remember Me?
-            </label>
+            <div class="notImage" align="center">
+                {%  if form.errors %}
+                <div class="loginError">
+                    <span>
+                        <b>
+                            Your username and/or password didn't match our records.
+                        <br>
+                            Please try again.
+                        </b>
+                    </span>
+                </div>
+                {% endif %}
+                <div class="loginFields">
+                <label for="username">
+                    <b> Username: </b>
+                </label>
+                <span>{{ form.username }}</span>
 
-            <label> <a href="}"> Forgot Password? </a> </label>
+                <label for="password">
+                    <b> Password: </b>
+                </label>
+                <span>{{ form.password }}</span>
+                </div>
 
-            <label style="float: right;"> <a href="{% url 'register' %}"> Register </a> </label>
-        </div>
-    </div>
+                <div>
+                    <button type="submit" class="loginButton" value="login"> Login </button>
+                </div>
 
-</form>
+                <div class="loginExtras">
+                    <label for="rememberMe" style="float: left;">
+                        <input type="checkbox" checked="checked" name="rememberMe" style="float: left;">
+                        Remember Me?
+                    </label>
 
-{%  endif %}
+                    <label> <a href="}"> Forgot Password? </a> </label>
+
+                    <label style="float: right;"> <a href="{% url 'register' %}"> Register </a> </label>
+                </div>
+            </div>
+
+        </form>
+
+    {%  endif %}
+</body>
