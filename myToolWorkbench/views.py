@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.models import User
 from django.views import generic
 
-from myToolWorkbench.forms import RegisterForm
+from myToolWorkbench.forms import RegisterForm, BusinessForm
 from myToolWorkbench.models import UserAccount, Business, Person
 
 
@@ -64,9 +64,43 @@ class DashboardView(generic.ListView):
     def get_queryset(self):
         today = date.today()
         today_str = calendar.day_name[today.weekday()]
-        return Business.objects.filter(days_visited=today_str[:3])
+        return Business.objects.filter(day_visited=today_str[:3])
 
 
-class BusinessView(generic.DetailView):
+class BusinessView(generic.ListView):
     template_name = 'people.html'
-    queryset = Business.objects.all()
+    context_object_name = 'business_list'
+
+    def get_queryset(self):
+        return Business.objects.all()
+
+
+def create_business(request):
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get('name')
+            address = form.cleaned_data.get('address')
+            owner_first = form.cleaned_data.get('owner_first')
+            owner_last = form.cleaned_data.get('owner_last')
+            phone = form.cleaned_data.get('phone')
+            day = form.cleaned_data.get('day')
+
+            if Business.objects.filter(name=name).exists():
+                print("Business " + name + " already exists")
+            else:
+                business = Business.objects.create()
+                business.name = name
+                business.address = address
+                business.owner_first=owner_first
+                business.owner_last = owner_last
+                business.phone_number = phone
+                business.day_visited = day
+                business.save()
+
+
+    else:
+        form = BusinessForm()
+    return render(request, 'add-business.html', {
+        'form': form
+    })

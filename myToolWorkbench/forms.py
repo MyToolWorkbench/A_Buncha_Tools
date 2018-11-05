@@ -10,3 +10,11 @@ class RegisterForm(forms.Form):
     username = forms.CharField(label="Username", required=True)
     password = forms.CharField(label="Password", required=True)
     password_conf = forms.CharField(label="Confirm Password", required=True)
+
+class BusinessForm(forms.Form):
+    name = forms.CharField(label='Business Name', required=True)
+    address = forms.CharField(label='Address', required=True)
+    owner_first = forms.CharField(label='Owner First Name', required=True)
+    owner_last = forms.CharField(label='Owner Last Name', required=True)
+    phone = forms.CharField(label='Phone Number', required=False)
+    day = forms.CharField(label='Day Visited', required=True)

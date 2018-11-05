@@ -5,4 +5,16 @@
 
 {% block content %}
     DASHBOARD
+
+    {% if today_business_list %}
+        <ul>
+        {% for business in today_business_list %}
+            <li> <h4>{{ business.name }}</h4>
+                {{ business.address }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No stops today.</p>
+    {% endif %}
+
 {% endblock %}

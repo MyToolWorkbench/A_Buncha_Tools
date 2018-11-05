@@ -4,5 +4,20 @@
 {% block title %}myTW People{% endblock %}
 
 {% block content %}
-PEOPLE
+    BUSINESSES
+    <label style="float: right;"> <a href="{% url 'add-business' %}"> Add Business </a> </label>
+
+
+    {% if business_list %}
+        <ul>
+        {% for business in business_list %}
+            <li> <h4>{{ business.name }}</h4>
+                {{ business.address }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No businesses are available.</p>
+    {% endif %}
+
+
 {% endblock %}
