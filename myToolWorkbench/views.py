@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import AccessMixin
 from django.contrib.auth.models import User
 from django.views import generic
+from django.http import HttpResponseRedirect
 
 from myToolWorkbench.forms import RegisterForm, BusinessForm, CustomerForm
 from myToolWorkbench.models import UserAccount, Business, Person, Employed
@@ -36,7 +37,6 @@ def register(request):
             pass2 = form.cleaned_data.get('password_conf')
             first_name = form.cleaned_data.get('first_name')
             last_name = form.cleaned_data.get('last_name')
-
             if User.objects.filter(username=username).exists():
                 print("User " + username + " already exists")
             elif pass1 != pass2:
@@ -49,6 +49,9 @@ def register(request):
                 user_account = UserAccount.objects.create(user=user)
                 user_account
                 user_account.save()
+                return HttpResponseRedirect('/myToolWorkbench/login')
+        else:
+            print(form.errors)
 
     else:
         form = RegisterForm()

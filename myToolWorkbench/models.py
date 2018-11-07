@@ -8,7 +8,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=30)
     email_address = models.EmailField(default='default@email.com')
-    address = models.CharField(max_length=150)
+    address = models.CharField(max_length=150, default='no address')
 
     def __str__(self):
         return self.first_name, self.last_name
@@ -82,3 +82,20 @@ class Tool(models.Model):
     width = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
     height = models.DecimalField(max_digits=7, decimal_places=2, default=0.00, null=True)
     origin_country = models.CharField(max_length=10, null=True)
+
+
+class Workbench(models.Model):
+    user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+
+
+class CustomTool(Tool):
+    creator = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+
+
+# Unique instance of tool, belongs to a Workbench and references a Tool or CustomTool object
+class ToolInstance(models.Model):
+    custom = models.BooleanField(default=False)
+    tool = models.ForeignKey(Tool, on_delete=models.CASCADE, null=True)
+    inventory = models.ForeignKey(Workbench, on_delete=models.CASCADE)
+
+
