@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image" href="{% static "favicon.ico" %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "login/base.css" %}">
+    {% block style %} {% endblock %}
     <title>{%  block title %} myToolWorkbench {%  endblock %}</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
                 <li><img class="small-logo" src="{% static  "shared/logo-w.png" %}"> </li>
                 <li class="nav-item-l"><a class="nav-time-a" href="{% url 'dashboard' %}"><p>Home</p></a></li>
                 <li class="nav-item-l"><a class="nav-time-a" href="{% url 'inventory' %}"><p>Inventory</p></a></li>
-                <li class="nav-item-l"><a class="nav-time-a" href="{% url 'sale' %}"><p>Make Sale</p></a></li>
+                <li class="nav-item-l"><a class="nav-time-a" href="{% url 'sale' %}"><p>Sales</p></a></li>
                 <li class="nav-item-l"><a class="nav-time-a" href="{% url 'people' %}"><p>Businesses</p></a></li>
                 <li class="nav-item-r highlight"><a class="nav-time-a" href="{% url 'logout' %}"><p>Logout</p></a></li>
                 <li class="nav-item-r"><p class="nav-time-b"> Hello, {{ user.first_name }} </p></li>
