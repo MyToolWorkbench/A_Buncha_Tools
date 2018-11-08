@@ -4,6 +4,13 @@
     position: relative;
 }
 
+.small-logo {
+    float: left;
+    max-height: 75px;
+    height: 10%;
+    width: auto;
+}
+
 .button_container {
     text-align: center;
 }
@@ -43,6 +50,14 @@ img {
 }
 
 .nav-time-a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav-time-b {
     display: block;
     color: white;
     text-align: center;
