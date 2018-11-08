@@ -1,6 +1,15 @@
 from django import forms
-#from .models import User
+# from .models import User
 # https://docs.djangoproject.com/en/1.8/ref/forms/fields/
+DAYS = (
+    ('Mon', 'Monday'),
+    ('Tue', 'Tuesday'),
+    ('Wed', 'Wednesday'),
+    ('Thu', 'Thursday'),
+    ('Fri', 'Friday'),
+    ('Sat', 'Saturday'),
+    ('Sun', 'Sunday'),
+)
 
 
 class RegisterForm(forms.Form):
@@ -18,7 +27,8 @@ class BusinessForm(forms.Form):
     owner_first = forms.CharField(label='Owner First Name', required=True)
     owner_last = forms.CharField(label='Owner Last Name', required=True)
     phone = forms.CharField(label='Phone Number', required=False)
-    day = forms.CharField(label='Day Visited', required=True)
+    day = forms.ChoiceField(label='Day Visited', choices=DAYS, widget=forms.RadioSelect, required=True)
+    # day = forms.CharField(label='Day Visited', required=True)
 
 
 class CustomerForm(forms.Form):
