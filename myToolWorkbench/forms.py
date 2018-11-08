@@ -1,5 +1,6 @@
 from django import forms
 # from .models import User
+from myToolWorkbench.models import Business
 # https://docs.djangoproject.com/en/1.8/ref/forms/fields/
 DAYS = (
     ('Mon', 'Monday'),
@@ -10,6 +11,14 @@ DAYS = (
     ('Sat', 'Saturday'),
     ('Sun', 'Sunday'),
 )
+
+# This will only run on runserver, need to pull the values some other way.....
+def generate_business_list():
+    b = []
+    for i in Business.objects.all():
+        print(i)
+        b.append((str(i), str(i)))
+    return b
 
 
 class RegisterForm(forms.Form):
@@ -27,7 +36,8 @@ class BusinessForm(forms.Form):
     owner_first = forms.CharField(label='Owner First Name', required=True)
     owner_last = forms.CharField(label='Owner Last Name', required=True)
     phone = forms.CharField(label='Phone Number', required=False)
-    day = forms.ChoiceField(label='Day Visited', choices=DAYS, widget=forms.RadioSelect, required=True)
+    day = forms.CharField(label='Day Visited', widget=forms.Select(choices=DAYS), required=True)
+    # day = forms.ChoiceField(label='Day Visited', choices=DAYS, widget=forms.RadioSelect, required=True)
     # day = forms.CharField(label='Day Visited', required=True)
 
 
@@ -36,4 +46,5 @@ class CustomerForm(forms.Form):
     last_name = forms.CharField(label='Last Name', required=True)
     phone = forms.CharField(label='Phone Number', required=True)
     email = forms.EmailField(label='Email Address', required=True)
-    business = forms.CharField(label='Business Name', required=True)
+    # business = forms.CharField(label='Business Name', required=True)
+    business = forms.CharField(label='Business Name', required=True, widget=forms.Select(choices=generate_business_list()))
