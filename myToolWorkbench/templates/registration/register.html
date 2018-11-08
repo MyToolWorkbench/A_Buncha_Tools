@@ -16,12 +16,12 @@
         {% csrf_token %}
 
         <div class="row">
-            <div class="field">
+            <div class="half-field">
                 <label>First Name: </label>
                 {{ form.first_name }}
             </div>
 
-            <div class="field">
+            <div class="half-field">
                 <label>Last Name: </label>
                 {{ form.last_name }}
             </div>
@@ -38,12 +38,12 @@
         </div>
 
         <div class="row">
-            <div class="field">
+            <div class="half-field">
                 <label>Password: </label>
                 {{ form.password }}
             </div>
 
-            <div class="field">
+            <div class="half-field">
                 <label>Confirm Password: </label>
                 {{ form.password_conf }}
             </div>
