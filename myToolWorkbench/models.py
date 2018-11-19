@@ -13,27 +13,6 @@ class Person(models.Model):
     def __str__(self):
         return self.first_name, self.last_name
 
-'''
-class Days(models.Model):
-    DAYS = (
-        ('Mon', 'Monday'),
-        ('Tues', 'Tuesday'),
-        ('Wed', 'Wednesday'),
-        ('Thurs', 'Thursday'),
-        ('Fri', 'Friday'),
-        ('Sat', 'Saturday'),
-        ('Sun', 'Sunday'),
-    )
-    days_visited = models.CharField(max_length=4, choices=DAYS)
-'''
-"""
-Business:
-Address 
-Owner
-Phone #
-Day(s) of visit
-"""
-
 
 class Business(models.Model):
     DAYS = (
@@ -57,9 +36,11 @@ class Business(models.Model):
         return self.name
 
 
+"""
 class Employed(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
+"""
 
 
 class UserAccount(Person):
@@ -68,6 +49,10 @@ class UserAccount(Person):
         on_delete=models.CASCADE,
         primary_key=True,
     )
+
+
+class Customer(Person):
+    business = models.ForeignKey(Business, on_delete=models.CASCADE, null=True)
 
 
 class Tool(models.Model):
