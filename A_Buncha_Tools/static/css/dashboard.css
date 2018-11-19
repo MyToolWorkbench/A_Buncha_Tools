@@ -1,0 +1,32 @@
+.todayList {
+    float: left;
+    width: 30%;
+    overflow-y: scroll;
+    max-height: 100%;
+}
+
+.todayList__item {
+    border: 1px black solid;
+    padding: 2% 5% 5% 5%;
+}
+
+.item__left {
+    float: left;
+}
+
+.item__right {
+    float: right;
+}
+
+.item__none {
+    clear: left;
+}
+
+a {
+    text-decoration: none;
+    color: #a51e24;
+}
+
+.map {
+    float: right;
+}
