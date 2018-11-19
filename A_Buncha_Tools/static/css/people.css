@@ -1,0 +1,9 @@
+.business_card {
+    float: left;
+    width:  30%;
+    min-width: 400px;
+    background-color: white;
+    border: 2px black solid;
+    margin-top: 10px;
+    margin-right: 10px;
+}

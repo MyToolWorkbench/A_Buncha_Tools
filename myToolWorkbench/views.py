@@ -86,7 +86,6 @@ class BusinessDetailView(generic.DetailView):
         return Business.objects.all()
 
 
-
 def create_business(request):
     if request.method == 'POST':
         form = BusinessForm(request.POST)

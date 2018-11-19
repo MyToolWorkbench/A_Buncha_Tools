@@ -1,20 +1,30 @@
 <!-- templates/dashboard.html -->
 {% extends 'base.html' %}
 
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/people.css" %}">
+{% endblock %}
+
 {% block title %}myTW People{% endblock %}
 
 {% block content %}
-    BUSINESSES
     <label style="float: right;"> <a href="{% url 'add-business' %}"> Add Business </a> </label>
 
-
     {% if business_list %}
-        <ul>
         {% for business in business_list %}
-            <li> <a href="{%  url 'business-details' business.id %}"><h4>{{ business.name }}</h4></a>
-                {{ business.address }}</li>
+            <div class="business_card">
+                <a href="{%  url 'business-details' business.id %}">
+                    <h1>
+                        {{ business.name }}
+                    </h1>
+                </a>
+                <p>
+
+                    {{ business.address }}
+                </p>
+            </div>
         {% endfor %}
-        </ul>
     {% else %}
         <p>No businesses are available.</p>
     {% endif %}

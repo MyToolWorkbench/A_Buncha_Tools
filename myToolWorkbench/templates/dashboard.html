@@ -1,20 +1,32 @@
 <!-- templates/dashboard.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}myTW Dashboard{% endblock %}
 
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/dashboard.css" %}">
+{% endblock %}
+
 {% block content %}
-    DASHBOARD
-
-    {% if today_business_list %}
-        <ul>
-        {% for business in today_business_list %}
-            <li> <a href="{%  url 'business-details' business.id %}"><h4>{{ business.name }}</h4></a>
-                {{ business.address }}</li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No stops today.</p>
-    {% endif %}
-
+    <div class="todayList">
+        {% if today_business_list %}
+            {% for business in today_business_list %}
+                <div class="todayList__item">
+                    <a href="{%  url 'business-details' business.id %}">
+                        <h1>{{ business.name }}</h1>
+                        <hr>
+                    </a>
+                    <p class="item__left">Owner: {{ business.owner_last }}, {{ business.owner_first }}</p>
+                    <p class="item__right">Tel: {{ business.phone_number }}</p>
+                    <p class="item__none">Address: <a href="https://www.google.com">{{ business.address }}</a></p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No stops today.</p>
+        {% endif %}
+    </div>
+    <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
 {% endblock %}
