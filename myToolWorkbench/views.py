@@ -9,7 +9,7 @@ from django.views import generic
 from django.http import HttpResponseRedirect
 
 from myToolWorkbench.forms import RegisterForm, BusinessForm, CustomerForm
-from myToolWorkbench.models import UserAccount, Business, Person, Employed
+from myToolWorkbench.models import UserAccount, Business, Person
 
 
 def login_view(request):
