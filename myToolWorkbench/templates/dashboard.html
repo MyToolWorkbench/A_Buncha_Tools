@@ -12,14 +12,19 @@
     <div class="todayList">
         {% if today_business_list %}
             {% for business in today_business_list %}
-                <div class="todayList__item">
+                <div class="todayList__item" id="{{ business.id }}">
                     <a href="{%  url 'business-details' business.id %}">
                         <h1>{{ business.name }}</h1>
                         <hr>
                     </a>
                     <p class="item__left">Owner: {{ business.owner_last }}, {{ business.owner_first }}</p>
                     <p class="item__right">Tel: {{ business.phone_number }}</p>
-                    <p class="item__none">Address: <a href="https://www.google.com">{{ business.address }}</a></p>
+                    <script>
+                        function gotoGoogleMaps() {
+                            location.href = "http://maps.google.com/?q={{ business.address }}"
+                        }
+                    </script>
+                    <p class="item__none">Address: <button onclick="gotoGoogleMaps()">{{ business.address }}</button></p>
                 </div>
             {% endfor %}
         {% else %}
@@ -27,6 +32,6 @@
         {% endif %}
     </div>
     <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=" width="1200" height="800" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
 {% endblock %}

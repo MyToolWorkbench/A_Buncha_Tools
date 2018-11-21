@@ -9,21 +9,22 @@
 {% block title %}myTW People{% endblock %}
 
 {% block content %}
-    <label style="float: right;"> <a href="{% url 'add-business' %}"> Add Business </a> </label>
+    <div class="button_bar">
+        <a href="{% url 'add-business' %}"> Add Business </a>
+    </div>
 
     {% if business_list %}
         {% for business in business_list %}
             <div class="business_card">
-                <a href="{%  url 'business-details' business.id %}">
-                    <h1>
-                        {{ business.name }}
-                    </h1>
-                </a>
-                <p>
-
-                    {{ business.address }}
-                </p>
-            </div>
+                    <a href="{%  url 'business-details' business.id %}">
+                        <h1>{{ business.name }}</h1>
+                        <hr>
+                    </a>
+                    <p class="item__left">Owner: {{ business.owner_last }}, {{ business.owner_first }}</p>
+                    <p class="item__right">Tel: {{ business.phone_number }}</p>
+                    <p class="item__none">Address: {{ business.address }}</p>
+                    <p class="item__none">Visit Day: {{ business.get_day_visited_display }}</p>
+                </div>
         {% endfor %}
     {% else %}
         <p>No businesses are available.</p>

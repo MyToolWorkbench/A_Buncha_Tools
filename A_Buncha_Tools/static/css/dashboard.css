@@ -1,6 +1,6 @@
 .todayList {
     float: left;
-    width: 30%;
+    width: 40%;
     overflow-y: scroll;
     max-height: 100%;
 }
@@ -29,4 +29,8 @@ a {
 
 .map {
     float: right;
+    height: auto;
+    max-width: 60%;
+    max-height: 100%;
+    overflow: hidden;
 }
