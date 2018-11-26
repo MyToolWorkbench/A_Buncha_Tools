@@ -36,11 +36,9 @@ class Business(models.Model):
         return self.name
 
 
-"""
 class Employed(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
-"""
 
 
 class UserAccount(Person):
@@ -50,10 +48,10 @@ class UserAccount(Person):
         primary_key=True,
     )
 
-
+"""
 class Customer(Person):
     business = models.ForeignKey(Business, on_delete=models.CASCADE, null=True)
-
+"""
 
 class Tool(models.Model):
     part_number = models.CharField(max_length=30)
