@@ -21,7 +21,8 @@
                     <p class="item__right">Tel: {{ business.phone_number }}</p>
                     <script>
                         function gotoGoogleMaps() {
-                            location.href = "http://maps.google.com/?q={{ business.address }}"
+                            document.getElementById("google_map").src =  "https://www.google.com/maps/embed/v1/place?key=AIzaSyCCWF2jywnf4CMsMw4kwwiokd0V1KXR9WA&q={{ business.address }}";
+                            document.getElementById("google_map").contentWindow.location.reload();
                         }
                     </script>
                     <p class="item__none">Address: <button onclick="gotoGoogleMaps()">{{ business.address }}</button></p>
@@ -31,7 +32,7 @@
             <p>No stops today.</p>
         {% endif %}
     </div>
-    <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=" width="1200" height="800" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <div class="map" >
+        <iframe id="google_map" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCCWF2jywnf4CMsMw4kwwiokd0V1KXR9WA&q=110+8th+stTroy+NY" width="1200" height="800" frameborder="0" style="border:0" allowfullscreen></iframe>
     </div>
 {% endblock %}
