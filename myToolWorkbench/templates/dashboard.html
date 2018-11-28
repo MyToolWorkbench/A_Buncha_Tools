@@ -12,21 +12,21 @@
     <div class="todayList">
         {% if today_business_list %}
             {% for business in today_business_list %}
-                <div class="todayList__item" id="{{ business.id }}">
+                <div class="todayList__item">
                     <a href="{%  url 'business-details' business.id %}">
                         <h1>{{ business.name }}</h1>
                         <hr>
                     </a>
                     <p class="item__left">Owner: {{ business.owner_last }}, {{ business.owner_first }}</p>
                     <p class="item__right">Tel: {{ business.phone_number }}</p>
-                    <script>
-                        function gotoGoogleMaps() {
-                            document.getElementById("google_map").src =  "https://www.google.com/maps/embed/v1/place?key=AIzaSyCCWF2jywnf4CMsMw4kwwiokd0V1KXR9WA&q={{ business.address }}";
-                            document.getElementById("google_map").contentWindow.location.reload();
-                        }
-                    </script>
-                    <p class="item__none">Address: <button onclick="gotoGoogleMaps()">{{ business.address }}</button></p>
+                    <p class="item__none">Address: <button id="{{ business.id }}">{{ business.address }}</button></p>
                 </div>
+                <script type="text/javascript">
+                    document.getElementById({{ business.id }}).addEventListener('click', function() {
+                        console.log(document.getElementById(this.id).innerHTML);
+                        document.getElementById("google_map").src =  "https://www.google.com/maps/embed/v1/place?key=AIzaSyCCWF2jywnf4CMsMw4kwwiokd0V1KXR9WA&q="+document.getElementById(this.id).innerHTML;
+                    });
+                </script>
             {% endfor %}
         {% else %}
             <p>No stops today.</p>
