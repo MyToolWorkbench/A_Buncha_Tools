@@ -69,17 +69,17 @@ class Tool(models.Model):
 
 
 class Workbench(models.Model):
-    user = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
 
 
 class CustomTool(Tool):
-    creator = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
 
 # Unique instance of tool, belongs to a Workbench and references a Tool or CustomTool object
 class ToolInstance(models.Model):
     custom = models.BooleanField(default=False)
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE, null=True)
-    inventory = models.IntegerField(default=0)
+    inventory = models.ForeignKey(Workbench, on_delete=models.CASCADE, default=1)
 
 

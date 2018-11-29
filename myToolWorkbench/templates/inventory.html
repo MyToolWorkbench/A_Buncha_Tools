@@ -18,16 +18,13 @@
             <div class="tool_card">
                 <ul>
                     <li>
-                       {{ tool.tool_id }}
+                       Part Number : {{ tool.tool.part_number }}
                     </li>
                     <li>
-                        {{ tool.description }}
+                        Description : {{ tool.tool.description }}
                     </li>
                     <li>
-                        {{ tool.regular_retail }}
-                    </li>
-                    <li>
-                        {{ tool.inventory }}
+                        Retail Price : ${{ tool.tool.regular_retail }}
                     </li>
                 </ul>
                 </div>

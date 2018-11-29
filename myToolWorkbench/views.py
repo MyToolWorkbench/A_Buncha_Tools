@@ -9,7 +9,7 @@ from django.views import generic
 from django.http import HttpResponseRedirect
 
 from myToolWorkbench.forms import RegisterForm, BusinessForm, CustomerForm, InventoryForm
-from myToolWorkbench.models import UserAccount, Business, Person, ToolInstance, Tool
+from myToolWorkbench.models import UserAccount, Business, Person, ToolInstance, Tool, Workbench
 
 
 def login_view(request):
@@ -47,6 +47,8 @@ def register(request):
                 user.last_name = last_name
                 user.save()
                 user_account = UserAccount.objects.create(user=user)
+                workbench = Workbench.objects.create(user=user)
+                workbench.save()
                 user_account
                 user_account.save()
                 return HttpResponseRedirect('/myToolWorkbench/login')
@@ -83,15 +85,21 @@ class BusinessDetailView(generic.DetailView):
     template_name = 'business-details.html'
 
     def get_queryset(self):
+
         return Business.objects.all()
 
 
 class InventoryView(generic.ListView):
     template_name = 'inventory.html'
-    context_object_name = 'tool_list'
+    context_object_name = 'inventory'
 
     def get_queryset(self):
-        return ToolInstance.objects.all()
+        workbench = Workbench.objects.filter(user=self.request.user)[:1].get()
+        tools = ToolInstance.objects.filter(inventory=workbench)
+
+        print("Bench id: " + str(workbench))
+        print("# tools: " + str(len(tools)))
+        return tools
 
 
 def create_business(request):
@@ -159,14 +167,16 @@ def add_inventory(request):
         form = InventoryForm(request.POST)
         if form.is_valid():
             part_number = form.cleaned_data.get('part_number')
-            inventory = form.cleaned_data.get('inventory')
+            print(part_number)
+            #inventory = form.cleaned_data.get('inventory')
 
             if ToolInstance.objects.filter(tool_id= Tool.objects.get(part_number=part_number)).exists():
                 ToolInstance.objects.filter(tool_id= Tool.objects.get(part_number=part_number)).inventory += 1
             else:
                 tool = ToolInstance.objects.create()
                 tool.tool_id = Tool.objects.get(part_number=part_number)
-                tool.inventory = inventory
+                tool.inventory = Workbench.objects.filter(user=request.user)[:1].get()
+                tool.save()
     else:
         form = InventoryForm()
     return render(request, 'add-inventory.html', {
