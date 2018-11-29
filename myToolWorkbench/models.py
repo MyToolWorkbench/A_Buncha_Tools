@@ -14,6 +14,10 @@ class Person(models.Model):
         return self.first_name, self.last_name
 
 
+class UserAccount(Person):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+
+
 class Business(models.Model):
     DAYS = (
         ('Mon', 'Monday'),
@@ -31,6 +35,7 @@ class Business(models.Model):
     phone_number = models.CharField(max_length=30)
     day_visited = models.CharField(max_length=3, choices=DAYS)
     employees = models.ManyToManyField(Person, through='Employed')
+    user_account = models.ForeignKey(UserAccount, on_delete=models.CASCADE, related_name='user_account', default=-1)
 
     def __str__(self):
         return self.name
@@ -41,12 +46,7 @@ class Employed(models.Model):
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
 
 
-class UserAccount(Person):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )
+
 
 """
 class Customer(Person):
