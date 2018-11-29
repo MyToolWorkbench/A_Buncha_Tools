@@ -53,6 +53,7 @@ class Customer(Person):
     business = models.ForeignKey(Business, on_delete=models.CASCADE, null=True)
 """
 
+
 class Tool(models.Model):
     part_number = models.CharField(max_length=30)
     description = models.TextField(default="")
