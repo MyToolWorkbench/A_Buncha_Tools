@@ -15,10 +15,7 @@ INVENTORY
             <div class="tool_card">
                 <ul>
                     <li>
-                        <a href="{%  url 'tool-details' tool.id %}">
-                            {{ tool.part_number}}
-                            <hr>
-                        </a>
+                       {{ tool.tool_id }}
                     </li>
                     <li>
                         {{ tool.description }}
@@ -30,10 +27,6 @@ INVENTORY
                         {{ tool.inventory }}
                     </li>
                 </ul>
-                    <a href="{%  url 'tool-details' tool.id %}">
-                        <h1>{{ tool.part_number }}</h1>
-                        <hr>
-                    </a>
                 </div>
         {% endfor %}
     {% else %}

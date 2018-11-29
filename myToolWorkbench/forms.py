@@ -22,7 +22,7 @@ def generate_business_list():
 def generate_tool_list():
     t = []
     for i in Tool.objects.all():
-        t.append(str(i))
+        t.append((str(i.part_number), str(i.part_number)))
     return t
 
 

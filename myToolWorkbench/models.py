@@ -79,6 +79,6 @@ class CustomTool(Tool):
 class ToolInstance(models.Model):
     custom = models.BooleanField(default=False)
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE, null=True)
-    inventory = models.ForeignKey(Workbench, on_delete=models.CASCADE)
+    inventory = models.IntegerField(default=0)
 
 

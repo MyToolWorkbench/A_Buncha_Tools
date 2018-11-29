@@ -152,6 +152,7 @@ def create_customer(request):
         'form': form
     })
 
+
 def add_inventory(request):
     if request.method == 'POST':
         form = InventoryForm(request.POST)
@@ -159,11 +160,11 @@ def add_inventory(request):
             part_number = form.cleaned_data.get('part_number')
             inventory = form.cleaned_data.get('inventory')
 
-            if ToolInstance.objects.filter(part_number=part_number).exists():
-                ToolInstance.objects.filter(inventory_id= Tool.objects.filter(part_number=part_number).get(id)).inventory += 1
+            if ToolInstance.objects.filter(tool_id= Tool.objects.get(part_number=part_number)).exists():
+                ToolInstance.objects.filter(tool_id= Tool.objects.get(part_number=part_number)).inventory += 1
             else:
                 tool = ToolInstance.objects.create()
-                tool.inventory_id = Tool.objects.filter(part_number=part_number).get(id)
+                tool.tool_id = Tool.objects.get(part_number=part_number)
                 tool.inventory = inventory
     else:
         form = InventoryForm()
