@@ -17,9 +17,9 @@
         {% for tool in inventory %}
             <div class="tool_card">
                 <ul>
-                    <li>
-                       Part Number : {{ tool.tool.part_number }}
-                    </li>
+                    <div class="tool_card__number">
+                        <h1>Part Number : {{ tool.tool.part_number }}</h1>
+                    </div>
                     <li>
                         Description : {{ tool.tool.description }}
                     </li>
