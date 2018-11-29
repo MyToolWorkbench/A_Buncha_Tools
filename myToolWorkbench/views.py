@@ -69,7 +69,8 @@ class DashboardView(generic.ListView):
     def get_queryset(self):
         today = date.today()
         today_str = calendar.day_name[today.weekday()]
-        return Business.objects.filter(day_visited=today_str[:3])
+        user = self.request.user
+        return Business.objects.filter(day_visited=today_str[:3]).filter(created_by=user)
 
 
 class BusinessView(generic.ListView):
@@ -77,7 +78,8 @@ class BusinessView(generic.ListView):
     context_object_name = 'business_list'
 
     def get_queryset(self):
-        return Business.objects.all()
+        user = self.request.user
+        return Business.objects.filter(created_by=user)
 
 
 class BusinessDetailView(generic.DetailView):
@@ -167,8 +169,6 @@ def add_inventory(request):
         form = InventoryForm(request.POST)
         if form.is_valid():
             part_number = form.cleaned_data.get('part_number')
-            print(part_number)
-            #inventory = form.cleaned_data.get('inventory')
 
             if ToolInstance.objects.filter(tool_id= Tool.objects.get(part_number=part_number)).exists():
                 ToolInstance.objects.filter(tool_id= Tool.objects.get(part_number=part_number)).inventory += 1
@@ -177,6 +177,7 @@ def add_inventory(request):
                 tool.tool_id = Tool.objects.get(part_number=part_number)
                 tool.inventory = Workbench.objects.filter(user=request.user)[:1].get()
                 tool.save()
+        return HttpResponseRedirect('/myToolWorkbench/inventory')
     else:
         form = InventoryForm()
     return render(request, 'add-inventory.html', {
