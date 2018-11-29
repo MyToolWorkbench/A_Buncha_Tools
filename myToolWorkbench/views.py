@@ -105,7 +105,7 @@ def create_business(request):
             phone = form.cleaned_data.get('phone')
             day = form.cleaned_data.get('day')
 
-            if Business.objects.filter(name=name).exists():
+            if Business.objects.filter(name=name).filter(created_by=request.user).exists():
                 print("Business " + name + " already exists")
             else:
                 business = Business.objects.create()
@@ -115,6 +115,7 @@ def create_business(request):
                 business.owner_last = owner_last
                 business.phone_number = phone
                 business.day_visited = day
+                business.created_by = request.user
                 business.save()
     else:
         form = BusinessForm()
