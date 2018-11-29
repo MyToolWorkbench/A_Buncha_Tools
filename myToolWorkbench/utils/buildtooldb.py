@@ -2,7 +2,14 @@ import csv
 from myToolWorkbench.models import Tool
 
 # if __name__ == '__main__':
+'''
+To use, go to folder with manage.py
+Open Django shell with:
+    python manage.py shell
+Run script with:
+    exec(open('myToolWorkbench/utils/buildtooldb.py').read())
 
+'''
 
 lol = list(csv.reader(open('myToolWorkbench/utils/tools.txt', 'r'), delimiter='\t'))
 i = 0;
