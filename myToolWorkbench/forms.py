@@ -1,6 +1,6 @@
 from django import forms
 # from .models import User
-from myToolWorkbench.models import Business
+from myToolWorkbench.models import Business, Tool
 # https://docs.djangoproject.com/en/1.8/ref/forms/fields/
 DAYS = (
     ('Mon', 'Monday'),
@@ -19,6 +19,11 @@ def generate_business_list():
         print(i)
         b.append((str(i), str(i)))
     return b
+def generate_tool_list():
+    t = []
+    for i in Tool.objects.all():
+        t.append(str(i))
+    return t
 
 
 class RegisterForm(forms.Form):
@@ -48,3 +53,8 @@ class CustomerForm(forms.Form):
     email = forms.EmailField(label='Email Address', required=True)
     # business = forms.CharField(label='Business Name', required=True)
     business = forms.CharField(label='Business Name', required=True, widget=forms.Select(choices=generate_business_list()))
+
+
+class InventoryForm(forms.Form):
+    part_number = forms.CharField(label='Part Number', required=True, widget=forms.Select(choices=generate_tool_list()))
+    inventory = forms.IntegerField(label='Quantity', required=True)

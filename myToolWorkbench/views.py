@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 from django.views import generic
 from django.http import HttpResponseRedirect
 
-from myToolWorkbench.forms import RegisterForm, BusinessForm, CustomerForm
-from myToolWorkbench.models import UserAccount, Business, Person
+from myToolWorkbench.forms import RegisterForm, BusinessForm, CustomerForm, InventoryForm
+from myToolWorkbench.models import UserAccount, Business, Person, ToolInstance, Tool
 
 
 def login_view(request):
@@ -86,6 +86,14 @@ class BusinessDetailView(generic.DetailView):
         return Business.objects.all()
 
 
+class InventoryView(generic.ListView):
+    template_name = 'inventory.html'
+    context_object_name = 'tool_list'
+
+    def get_queryset(self):
+        return ToolInstance.objects.all()
+
+
 def create_business(request):
     if request.method == 'POST':
         form = BusinessForm(request.POST)
@@ -141,5 +149,24 @@ def create_customer(request):
     else:
         form = CustomerForm()
     return render(request, 'add-customer.html', {
+        'form': form
+    })
+
+def add_inventory(request):
+    if request.method == 'POST':
+        form = InventoryForm(request.POST)
+        if form.is_valid():
+            part_number = form.cleaned_data.get('part_number')
+            inventory = form.cleaned_data.get('inventory')
+
+            if ToolInstance.objects.filter(part_number=part_number).exists():
+                ToolInstance.objects.filter(inventory_id= Tool.objects.filter(part_number=part_number).get(id)).inventory += 1
+            else:
+                tool = ToolInstance.objects.create()
+                tool.inventory_id = Tool.objects.filter(part_number=part_number).get(id)
+                tool.inventory = inventory
+    else:
+        form = InventoryForm()
+    return render(request, 'add-inventory.html', {
         'form': form
     })

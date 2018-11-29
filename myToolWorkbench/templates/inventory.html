@@ -5,4 +5,38 @@
 
 {% block content %}
 INVENTORY
+
+     <div class="button_bar">
+        <a href="{% url 'add-inventory' %}"> Add Tools </a>
+    </div>
+
+    {% if tool_list %}
+        {% for tool in tool_list %}
+            <div class="tool_card">
+                <ul>
+                    <li>
+                        <a href="{%  url 'tool-details' tool.id %}">
+                            {{ tool.part_number}}
+                            <hr>
+                        </a>
+                    </li>
+                    <li>
+                        {{ tool.description }}
+                    </li>
+                    <li>
+                        {{ tool.regular_retail }}
+                    </li>
+                    <li>
+                        {{ tool.inventory }}
+                    </li>
+                </ul>
+                    <a href="{%  url 'tool-details' tool.id %}">
+                        <h1>{{ tool.part_number }}</h1>
+                        <hr>
+                    </a>
+                </div>
+        {% endfor %}
+    {% else %}
+        <p>Your inventory is empty</p>
+    {% endif %}
 {% endblock %}

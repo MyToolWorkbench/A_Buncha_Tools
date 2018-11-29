@@ -21,7 +21,7 @@ from myToolWorkbench import views
 urlpatterns = [
     path('', views.DashboardView.as_view(), name='dashboard'),
     path('myToolWorkbench/home/',views.DashboardView.as_view(), name='dashboard'),
-    path('myToolWorkbench/inventory/', TemplateView.as_view(template_name='inventory.html'), name='inventory'),
+    path('myToolWorkbench/inventory/', views.InventoryView.as_view(), name='inventory'),
     path('myToolWorkbench/sale/', TemplateView.as_view(template_name='sale.html'), name='sale'),
     path('myToolWorkbench/people/', views.BusinessView.as_view(), name='people'),
     path('admin/', admin.site.urls),
@@ -30,5 +30,6 @@ urlpatterns = [
     path('myToolWorkbench/add-business/', views.create_business, name='add-business'),
     path('myToolWorkbench/<int:pk>/',views.BusinessDetailView.as_view(), name='business-details'),
     path('myToolWorkbench/add-customer/', views.create_customer, name='add-customer'),
+    path('myToolWorkbench/add-inventory/', views.add_inventory, name='add-inventory'),
     # path('myToolWorkbench/register/', TemplateView.as_view(template_name="registration/register.html"), name='register'),
 ]
