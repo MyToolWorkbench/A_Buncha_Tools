@@ -1,17 +1,20 @@
 <!-- templates/dashboard.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}myTW Inventory{% endblock %}
 
-{% block content %}
-INVENTORY
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/inventory.css" %}">
+{% endblock %}
 
+{% block content %}
      <div class="button_bar">
         <a href="{% url 'add-inventory' %}"> Add Tools </a>
     </div>
 
-    {% if tool_list %}
-        {% for tool in tool_list %}
+    {% if inventory %}
+        {% for tool in inventory %}
             <div class="tool_card">
                 <ul>
                     <li>

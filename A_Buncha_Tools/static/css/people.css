@@ -9,6 +9,13 @@
 
 .button_bar {
     width: 100%;
+    height: 50px;
+    float: left;
+}
+
+.button_bar__bar {
+    border: 1px solid black;
+    width: 100%;
 }
 
 .item__left {
