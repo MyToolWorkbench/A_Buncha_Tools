@@ -1,0 +1,7 @@
+.tool_card {
+    border: 1px black solid;
+}
+
+.tool_card__number {
+    color: #a51e24;
+}
