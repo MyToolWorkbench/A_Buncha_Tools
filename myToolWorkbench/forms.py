@@ -12,13 +12,18 @@ DAYS = (
     ('Sun', 'Sunday'),
 )
 
+
 # This will only run on runserver, need to pull the values some other way.....
+# Returns list of all business objects to Businesses view
 def generate_business_list():
     b = []
     for i in Business.objects.all():
         print(i)
         b.append((str(i), str(i)))
     return b
+
+
+# Returns list of all tool templates to add tool view
 def generate_tool_list():
     t = []
     for i in Tool.objects.all():
@@ -26,6 +31,7 @@ def generate_tool_list():
     return t
 
 
+# Form class for user registration form
 class RegisterForm(forms.Form):
     first_name = forms.CharField(label="First Name", required=True)
     last_name = forms.CharField(label="Last Name", required=True)
@@ -35,6 +41,7 @@ class RegisterForm(forms.Form):
     password_conf = forms.CharField(label="Confirm Password", required=True)
 
 
+# Form class for add Business form
 class BusinessForm(forms.Form):
     name = forms.CharField(label='Business Name', required=True)
     address = forms.CharField(label='Address', required=True)
@@ -46,6 +53,7 @@ class BusinessForm(forms.Form):
     # day = forms.CharField(label='Day Visited', required=True)
 
 
+# Form class for add customer to business form
 class CustomerForm(forms.Form):
     first_name = forms.CharField(label='First Name', required=True)
     last_name = forms.CharField(label='Last Name', required=True)
@@ -55,6 +63,7 @@ class CustomerForm(forms.Form):
     business = forms.CharField(label='Business Name', required=True, widget=forms.Select(choices=generate_business_list()))
 
 
+# Form class for add item to inventory form
 class InventoryForm(forms.Form):
     part_number = forms.CharField(label='Part Number', required=True, widget=forms.Select(choices=generate_tool_list()))
     inventory = forms.IntegerField(label='Quantity', required=True)

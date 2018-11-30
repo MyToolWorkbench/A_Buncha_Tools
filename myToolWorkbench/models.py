@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+# Used to describe customers and mTW users.
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=150)
@@ -14,10 +15,12 @@ class Person(models.Model):
         return self.first_name, self.last_name
 
 
+# Extends Person and links information to an authenticated user
 class UserAccount(Person):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
 
+# Businesses users sell to/contract with
 class Business(models.Model):
     DAYS = (
         ('Mon', 'Monday'),
@@ -41,19 +44,14 @@ class Business(models.Model):
         return self.name
 
 
+# Connector class, connects Business object and client(Person)
 class Employed(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     business = models.ForeignKey(Business, on_delete=models.CASCADE)
 
 
 
-
-"""
-class Customer(Person):
-    business = models.ForeignKey(Business, on_delete=models.CASCADE, null=True)
-"""
-
-
+# Tool template, allows quick creation of tool instances
 class Tool(models.Model):
     part_number = models.CharField(max_length=30)
     description = models.TextField(default="")
@@ -68,10 +66,12 @@ class Tool(models.Model):
     origin_country = models.CharField(max_length=10, null=True)
 
 
+# Tool inventory assigned to a user
 class Workbench(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
 
 
+# For tools created by users when tool template does not have the required tool
 class CustomTool(Tool):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
