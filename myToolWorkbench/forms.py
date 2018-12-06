@@ -37,8 +37,8 @@ class RegisterForm(forms.Form):
     last_name = forms.CharField(label="Last Name", required=True)
     email_address = forms.EmailField(label="Email Address", required=True)
     username = forms.CharField(label="Username", required=True)
-    password = forms.CharField(label="Password", required=True)
-    password_conf = forms.CharField(label="Confirm Password", required=True)
+    password = forms.CharField(label="Password", required=True, widget=forms.PasswordInput)
+    password_conf = forms.CharField(label="Confirm Password", required=True, widget=forms.PasswordInput)
 
 
 # Form class for add Business form
