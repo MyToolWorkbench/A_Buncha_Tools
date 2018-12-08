@@ -142,6 +142,7 @@ def create_business(request):
                 business.day_visited = day
                 business.created_by = request.user
                 business.save()
+                return HttpResponseRedirect('/myToolWorkbench/people')
     else:
         form = BusinessForm()
     return render(request, 'add-business.html', {
